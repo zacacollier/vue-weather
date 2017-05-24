@@ -1,7 +1,7 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue';
-import Vuex, {mapState, } from 'vuex';
+import Vuex from 'vuex';
 import App from './App';
 import router from './router';
 
@@ -10,7 +10,7 @@ Vue.use(Vuex);
 Vue.config.devtools = true;
 
 /* eslint-disable no-new */
-new Vuex.Store({
+const store = new Vuex.Store({
   state: {
     search: {
       value: '',
@@ -34,12 +34,20 @@ Vue.component('searchbar', {
   name: 'searchbar',
   template: `
     <div>
-      <input placeholder="sup">
+      <input v-model="value" placeholder="sup">
     </div>
   `,
-  computed: mapState({
-    value: state => state.search.value,
-  }),
+  store,
+  computed: {
+    value: {
+      get () {
+        return this.$store.state.search.value;
+      },
+      set (value) {
+        this.$store.commit('searchValueChange', value);
+      },
+    },
+  },
 });
 new Vue({
   el: '#app',
