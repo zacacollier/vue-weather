@@ -27,15 +27,20 @@ const store = new Vuex.Store({
     searchValueChange (state, payload) {
       state.search.value = payload;
     },
+    handleSearchSubmit (state, payload) {
+      console.log(payload);
+      // state = { ...state, fetch: { ...state.fetch, pending: true, }, };
+    },
   },
 });
 
 Vue.component('searchbar', {
   name: 'searchbar',
   template: `
-    <div>
-      <input v-model="value" placeholder="sup">
-    </div>
+    <form @submit="handleSubmit">
+      <input v-model="value" type="text" placeholder="Search for your city">
+      <input type="submit" value="Go">
+    </form>
   `,
   store,
   computed: {
@@ -46,6 +51,12 @@ Vue.component('searchbar', {
       set (value) {
         this.$store.commit('searchValueChange', value);
       },
+    },
+  },
+  methods: {
+    handleSubmit (e) {
+      e.preventDefault();
+      return this.$store.commit('handleSearchSubmit', this.value);
     },
   },
 });
