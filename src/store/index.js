@@ -17,32 +17,31 @@ const store = new Vuex.Store({
       error: '',
       results: [],
     },
+    weather: {
+      selectedCity: '',
+    },
   },
   mutations: {
     searchValueChange (state, payload) {
       state.search.value = payload;
     },
-    searchStart (state) {
-      state = { ...state, fetch: { ...state.fetch, pending: true, }, };
+    searchStart (state, city) {
+      state.weather.selectedCity = city;
+      state.fetch.pending = true;
     },
-    searchSuccess (state, data) {
-      console.log(data);
-      state = {
-        ...state,
-        fetch: { ...state.fetch,
-          pending: false,
-          results: [ ...state.fetch.results, data, ],
-        },
-      };
+    searchSuccess (state, res) {
+      state.fetch.pending = false;
+      state.fetch.results = res;
     },
     searchError (state, err) {
-      state = { ...state, fetch: { ...state.fetch, pending: false, error: err, }, };
+      state.fetch.pending = false;
+      state.fetch.error = err;
     },
   },
   actions: {
-    handleSearchSubmit ({ commit, }, query) {
-      commit('searchStart');
-      axios.get(C.OpenWeatherURL(query))
+    handleSearchSubmit ({ commit, }, city) {
+      commit('searchStart', city);
+      axios.get(C.OpenWeatherURL(city))
         .then(res => {
           console.log(res);
           commit('searchSuccess', res.data);
