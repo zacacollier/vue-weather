@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
     <h1>Weather in {{ msg }}</h1>
-    <searchbar></searchbar>
+    <search-bar></search-bar>
     <search-results></search-results>
   </div>
 </template>
