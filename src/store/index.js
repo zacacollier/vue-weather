@@ -27,7 +27,13 @@ const store = new Vuex.Store({
     },
     searchSuccess (state, data) {
       console.log(data);
-      state = { ...state, fetch: { ...state.fetch, pending: false, results: [ ...state.fetch.results, data, ], }, };
+      state = {
+        ...state,
+        fetch: { ...state.fetch,
+          pending: false,
+          results: [ ...state.fetch.results, data, ],
+        },
+      };
     },
     searchError (state, err) {
       state = { ...state, fetch: { ...state.fetch, pending: false, error: err, }, };

@@ -2,6 +2,7 @@
   <div class="hello">
     <h1>Weather in {{ msg }}</h1>
     <searchbar></searchbar>
+    <search-results></search-results>
   </div>
 </template>
 
