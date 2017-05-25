@@ -26,7 +26,8 @@ const store = new Vuex.Store({
       state = { ...state, fetch: { ...state.fetch, pending: true, }, };
     },
     searchSuccess (state, data) {
-      state = { ...state, fetch: { ...state.fetch, pending: false, results: data, }, };
+      console.log(data);
+      state = { ...state, fetch: { ...state.fetch, pending: false, results: [ ...state.fetch.results, data, ], }, };
     },
     searchError (state, err) {
       state = { ...state, fetch: { ...state.fetch, pending: false, error: err, }, };
@@ -37,7 +38,8 @@ const store = new Vuex.Store({
       commit('searchStart');
       axios.get(C.OpenWeatherURL(query))
         .then(res => {
-          commit('searchSuccess', res);
+          console.log(res);
+          commit('searchSuccess', res.data);
         })
         .catch(err => commit('searchError', err));
     },
