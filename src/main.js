@@ -17,7 +17,6 @@ Vue.component('searchbar', {
       <input type="submit" value="Go">
     </form>
   `,
-  store,
   computed: {
     value: {
       get () {
@@ -38,6 +37,7 @@ Vue.component('searchbar', {
 new Vue({
   el: '#app',
   router,
+  store,
   template: '<App></App>',
   components: { App, },
 });

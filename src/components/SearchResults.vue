@@ -7,7 +7,7 @@
 export default {
   name: 'search-results',
   computed: {
-    results () {
+    get () {
       return this.$store.state.fetch.results;
     },
   },
