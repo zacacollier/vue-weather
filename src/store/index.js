@@ -22,8 +22,7 @@ const store = new Vuex.Store({
     searchValueChange (state, payload) {
       state.search.value = payload;
     },
-    searchStart (state, payload) {
-      console.log(payload);
+    searchStart (state) {
       state = { ...state, fetch: { ...state.fetch, pending: true, }, };
     },
     searchSuccess (state, data) {

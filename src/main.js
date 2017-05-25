@@ -29,7 +29,7 @@ Vue.component('searchbar', {
   methods: {
     handleSubmit (e) {
       e.preventDefault();
-      return this.$store.commit('handleSearchSubmit', this.value);
+      return this.$store.dispatch('handleSearchSubmit', this.value);
     },
   },
 });
