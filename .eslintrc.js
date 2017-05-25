@@ -22,6 +22,7 @@ module.exports = {
         "error",
         2
     ],
+    "object-curly-spacing": "off",
     "linebreak-style": [
         "error",
         "unix"
