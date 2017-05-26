@@ -1,7 +1,7 @@
 <template>
   <div id="search-results">
-    <h1>{{ results.city ? results.city.name : "" }}</h1>
-    <h2>{{ results.city ? results.city.country : "" }}</h2>
+    <h1>{{ city.cityName ? city.cityName : "" }}</h1>
+    <h2>{{ city.country ? city.country : "" }}</h2>
   </div>
 </template>
 
@@ -9,8 +9,8 @@
 export default {
   name: 'search-results',
   computed: {
-    results () {
-      return this.$store.state.fetch.results;
+    city () {
+      return this.$store.state.weather.selectedCity;
     },
   },
 };

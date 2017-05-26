@@ -18,20 +18,29 @@ const store = new Vuex.Store({
       results: [],
     },
     weather: {
-      selectedCity: '',
+      selectedCity: {
+        cityName: '',
+        state: '',
+        country: '',
+        cityData: {},
+        weatherData: [],
+      },
     },
   },
   mutations: {
     searchValueChange (state, payload) {
       state.search.value = payload;
     },
-    searchStart (state, city) {
-      state.weather.selectedCity = city;
+    searchStart (state, city, country = 'us') {
+      state.weather.selectedCity.cityName = city;
+      state.weather.selectedCity.country = country;
       state.fetch.pending = true;
     },
     searchSuccess (state, res) {
       state.fetch.pending = false;
       state.fetch.results = res;
+      state.weather.selectedCity.cityData = res.city;
+      state.weather.selectedCity.weatherData = res.list;
     },
     searchError (state, err) {
       state.fetch.pending = false;
@@ -44,6 +53,7 @@ const store = new Vuex.Store({
       axios.get(C.OpenWeatherURL(city))
         .then(res => {
           console.log(res);
+          // axios.get(`http://maps.googleapis.com/maps/api/geocode/json?latlng=${},${}&sensor=false`)
           commit('searchSuccess', res.data);
         })
         .catch(err => commit('searchError', err));
