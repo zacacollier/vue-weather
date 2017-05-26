@@ -1,7 +1,7 @@
 <template>
   <div id="search-results">
-    <h1>{{ results.city.name }}</h1>
-    <h2>{{ results.city.country }}</h2>
+    <h1>{{ results.city ? results.city.name : "" }}</h1>
+    <h2>{{ results.city ? results.city.country : "" }}</h2>
   </div>
 </template>
 
