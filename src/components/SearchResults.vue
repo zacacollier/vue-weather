@@ -1,7 +1,7 @@
 <template>
-  <div id="search-results">
-    <h1>{{ city.cityName ? city.cityName : "" }}</h1>
-    <h2>{{ city.country ? city.country : "" }}</h2>
+  <div @click="handleClick" id="search-results">
+    <h2>{{ city.cityName ? city.cityName : "" }}</h2>
+    <h3>{{ city.country ? city.country : "" }}</h3>
   </div>
 </template>
 
@@ -11,6 +11,11 @@ export default {
   computed: {
     city () {
       return this.$store.state.weather.selectedCity;
+    },
+  },
+  methods: {
+    handleClick (e) {
+      return this.$store.dispatch('saveCity', this.city);
     },
   },
 };

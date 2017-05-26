@@ -53,10 +53,20 @@ const store = new Vuex.Store({
       axios.get(C.OpenWeatherURL(city))
         .then(res => {
           console.log(res);
-          // axios.get(`http://maps.googleapis.com/maps/api/geocode/json?latlng=${},${}&sensor=false`)
           commit('searchSuccess', res.data);
         })
         .catch(err => commit('searchError', err));
+    },
+    saveCity ({ commit, }, city) {
+      console.log(city);
+      const { coord, } = city.cityData;
+      axios.get(`http://maps.googleapis.com/maps/api/geocode/json?latlng=${coord.lat},${coord.lon}&sensor=false`)
+        .then(res => {
+          console.log(res);
+        })
+        .catch(err => {
+          console.error(err);
+        });
     },
   },
 });
