@@ -5,6 +5,7 @@
         classname="form-control search-input"
         types='(cities)'
         placeholder="Search"
+        v-on:placechanged="handleSubmit"
       >
       </vue-google-autocomplete>
       <input class="search-btn" type="submit" value="Go">
@@ -29,7 +30,6 @@ export default {
   },
   methods: {
     handleSubmit (e) {
-      e.preventDefault();
       return this.$store.dispatch('handleSearchSubmit', this.value);
     },
   },
