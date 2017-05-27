@@ -5,6 +5,7 @@
         classname="form-control search-input"
         types='(cities)'
         placeholder="Search"
+        v-on:change="handleChange"
         v-on:placechanged="handleSubmit"
       >
       </vue-google-autocomplete>
@@ -16,8 +17,6 @@
 <script>
 export default {
   name: 'searchbar',
-  template: `
-  `,
   computed: {
     value: {
       get () {
@@ -29,8 +28,13 @@ export default {
     },
   },
   methods: {
-    handleSubmit (e) {
-      return this.$store.dispatch('handleSearchSubmit', this.value);
+    handleChange (value) {
+      console.log(value);
+      this.$store.commit('searchValueChange', value);
+    },
+    handleSubmit (addressData, placeResultData) {
+      console.log(addressData);
+      return this.$store.dispatch('handleSearchSubmit', addressData);
     },
   },
 };

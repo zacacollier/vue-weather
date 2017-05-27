@@ -1,4 +1,5 @@
 import * as KEYS from '../fakeEnv';
+import _ from 'lodash';
 
 export const OpenWeatherURL = (city, country = 'us', key = KEYS.OPEN_WEATHER_API_KEY) =>
   `http://api.openweathermap.org/data/2.5/forecast?q=${city},${country}&appid=${key}`;
@@ -11,3 +12,11 @@ export const GoogleMapsURL = (lat, long, key = KEYS.GOOGLE_MAPS_API_KEY) =>
 
 export const GoogleGeocodeURL = (lat, long, key = KEYS.GOOGLE_GEOCODE_API_KEY) =>
   `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${long}&sensor=true&key=${key}`;
+
+/*  Find a given [predicate] within an Array([seq])
+ *  @param { Array } seq : Array to search within
+ *  @param { * }  predicate : Search criteria
+ */
+export const findInSeq = (seq, predicate) => _.find(seq, predicate);
+
+export const has = (o, path) => _.has(o, path);

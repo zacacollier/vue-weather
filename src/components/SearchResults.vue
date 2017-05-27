@@ -10,7 +10,7 @@ export default {
   name: 'search-results',
   computed: {
     city () {
-      return this.$store.state.weather.selectedCity;
+      return this.$store.state.city.GoogleMaps;
     },
   },
   methods: {
