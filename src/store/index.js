@@ -2,7 +2,6 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import axios from 'axios';
 import * as C from '../constants';
-import _ from 'lodash';
 
 Vue.use(Vuex);
 Vue.config.devtools = true;
@@ -18,15 +17,15 @@ const store = new Vuex.Store({
       error: '',
       results: [],
     },
-    city: {
+    API: {
       GoogleMaps: {
         cityName: '',
         state: '',
         country: '',
         cityData: {},
       },
-      WeatherAPI: {
-        cityData: '',
+      Weather: {
+        cityData: {},
         weatherData: [],
       },
     },
@@ -36,18 +35,17 @@ const store = new Vuex.Store({
       state.search.value = payload;
     },
     searchStart (state, payload) {
-      console.log(arguments);
-      state.city.GoogleMaps.cityName = payload.locality;
-      state.city.GoogleMaps.country = payload.country;
-      state.city.GoogleMaps.state = payload.administrative_area_level_1;
-      state.city.GoogleMaps.cityData = _.assign(state.city.GoogleMaps.cityData, [ payload.latitude, payload.longitude, ]);
+      state.API.GoogleMaps.cityName = payload.locality;
+      state.API.GoogleMaps.country = payload.country;
+      state.API.GoogleMaps.state = payload.administrative_area_level_1;
+      state.API.GoogleMaps.cityData = { ...state.API.GoogleMaps.cityData, latitude: payload.latitude, longitude: payload.longitude, };
       state.fetch.pending = true;
     },
     searchSuccess (state, res) {
       state.fetch.pending = false;
       state.fetch.results = res;
-      state.city.WeatherApi.cityData = res.city;
-      state.city.WeatherApi.weatherData = res.list;
+      state.API.Weather.cityData = { ...state.API.Weather.cityData, ...res.city, };
+      state.API.Weather.weatherData = res.list;
     },
     searchError (state, err) {
       state.fetch.pending = false;
@@ -56,13 +54,17 @@ const store = new Vuex.Store({
   },
   actions: {
     handleSearchSubmit ({ commit, }, addressData) {
+      console.log(addressData);
       commit('searchStart', addressData);
       axios.get(C.OpenWeatherURL(addressData.locality))
         .then(res => {
           console.log(res);
           commit('searchSuccess', res.data);
         })
-        .catch(err => commit('searchError', err));
+        .catch(err => {
+          console.log(err);
+          commit('searchError', err);
+        });
     },
     saveCity ({ commit, }, city) {
       console.log(city);
