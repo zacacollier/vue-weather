@@ -3,6 +3,7 @@
     <h1>Weather in {{ msg }}</h1>
     <search-bar></search-bar>
     <search-results></search-results>
+    <vue-embed-google-map></vue-embed-google-map>
   </div>
 </template>
 
