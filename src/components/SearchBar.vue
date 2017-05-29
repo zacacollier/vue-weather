@@ -10,7 +10,6 @@
       >
       </vue-google-autocomplete>
       <input class="search-btn" type="submit" value="Go">
-      <!-- <input class="search-input" type="text" v-model="value" placeholder="Search for your city"> -->
     </form>
 </template>
 

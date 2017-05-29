@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import createPersistedState from 'vuex-persistedstate';
 import axios from 'axios';
 import * as C from '../constants';
 
@@ -7,6 +8,7 @@ Vue.use(Vuex);
 Vue.config.devtools = true;
 
 const store = new Vuex.Store({
+  plugins: [ createPersistedState(), ],
   state: {
     search: {
       value: '',
@@ -68,8 +70,8 @@ const store = new Vuex.Store({
     },
     saveCity ({ commit, }, city) {
       console.log(city);
-      const { coord, } = city.cityData;
-      axios.get(`http://maps.googleapis.com/maps/api/geocode/json?latlng=${coord.lat},${coord.lon}&sensor=false`)
+      const { latitude, longitude, } = city.cityData;
+      axios.get(`http://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&sensor=false`)
         .then(res => {
           console.log(res);
         })

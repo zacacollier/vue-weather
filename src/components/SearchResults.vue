@@ -1,6 +1,6 @@
 <template>
   <div @click="handleClick" id="search-results">
-    <h2>{{ city.cityName ? city.cityName : "" }}</h2>
+    <h2>{{ city.cityName ? `${city.cityName}, ${city.state}` : "" }}</h2>
     <h3>{{ city.country ? city.country : "" }}</h3>
   </div>
 </template>
