@@ -32,7 +32,8 @@ export default {
 
 <style lang="css">
 .small {
+  width: auto;
   /*max-width: 300px;*/
-  display: inline-block;
+  /*display: inline-block;*/
 }
 </style>
