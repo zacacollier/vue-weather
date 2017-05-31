@@ -23,5 +23,6 @@ export default {
 <style scoped>
 .vue-map-container {
   display: inline-block;
+  border-radius: 50px;
 }
 </style>

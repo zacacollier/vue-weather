@@ -4,6 +4,7 @@ import App from './App';
 import SearchResults from './components/SearchResults.vue';
 import SearchBar from './components/SearchBar.vue';
 import GoogleMap from './components/GoogleMap.vue';
+import WeatherChart from './components/WeatherChart.vue';
 import * as KEYS from './fakeEnv';
 import VueGoogleAutocomplete from 'vue-google-autocomplete';
 import * as VueGoogleMaps from 'vue2-google-maps';
@@ -16,10 +17,11 @@ Vue.component('search-results', SearchResults);
 Vue.component('search-bar', SearchBar);
 Vue.component('vue-google-autocomplete', VueGoogleAutocomplete);
 Vue.component('vue-embed-google-map', GoogleMap);
+Vue.component('weather-chart', WeatherChart);
 
 Vue.use(VueGoogleMaps, {
   load: {
-    key: KEYS.GOOGLE_MAPS_API_KEY,
+    key: KEYS.GOOGLE_PLACES_API_KEY,
     // v: 'OPTIONAL VERSION NUMBER',
     // libraries: 'places', //// If you need to use place input
   },
