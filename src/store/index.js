@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import createPersistedState from 'vuex-persistedstate';
+import initialState from './initialState';
 import axios from 'axios';
 import * as C from '../constants';
 
@@ -9,29 +10,7 @@ Vue.config.devtools = true;
 
 const store = new Vuex.Store({
   plugins: [ createPersistedState(), ],
-  state: {
-    search: {
-      value: '',
-    },
-    fetch: {
-      pending: false,
-      success: false,
-      error: '',
-      results: [],
-    },
-    API: {
-      GoogleMaps: {
-        cityName: '',
-        state: '',
-        country: '',
-        cityData: {},
-      },
-      Weather: {
-        cityData: {},
-        weatherData: [],
-      },
-    },
-  },
+  state: initialState,
   mutations: {
     searchValueChange (state, payload) {
       state.search.value = payload;
