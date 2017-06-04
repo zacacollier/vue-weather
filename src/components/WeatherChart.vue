@@ -40,8 +40,9 @@ export default {
 
 <style lang="css">
 .small {
-  width: auto;
-  /*max-width: 300px;*/
-  /*display: inline-block;*/
+  height: 50%;
+  width: 100%;
+}
+.small svg {
 }
 </style>

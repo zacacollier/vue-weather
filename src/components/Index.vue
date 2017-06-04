@@ -3,9 +3,13 @@
     <h1>Weather in {{ msg }}</h1>
     <search-bar></search-bar>
     <div class="cities">
-      <search-results></search-results>
-      <vue-embed-google-map></vue-embed-google-map>
-      <weather-chart></weather-chart>
+      <div class="results">
+        <search-results></search-results>
+        <vue-embed-google-map></vue-embed-google-map>
+      </div>
+      <div class="charts">
+        <weather-chart></weather-chart>
+      </div>
     </div>
   </div>
 </template>
@@ -40,12 +44,25 @@ li {
 a {
   color: #42b983;
 }
+.index {
+  height: 100%;
+}
 .cities {
   width: auto;
-  height: auto;
+  height: 100%;
   padding: 15px;
   margin: 15px auto;
   background-color: rgba(179, 179, 179, .2);
   border-radius: 30px;
+  display: flex;
+}
+.results {
+  width: 37.5%;
+  flex-direction: column;
+  justify-content: center;
+}
+.charts {
+  width: 62.5%;
+  flex-direction: row;
 }
 </style>
