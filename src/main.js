@@ -5,8 +5,9 @@ import SearchResults from './components/SearchResults.vue';
 import SearchBar from './components/SearchBar.vue';
 import GoogleMap from './components/GoogleMap.vue';
 import WeatherChart from './components/WeatherChart.vue';
-import * as KEYS from './fakeEnv';
 import VueGoogleAutocomplete from 'vue-google-autocomplete';
+import Trend from 'vuetrend';
+import * as KEYS from './fakeEnv';
 import * as VueGoogleMaps from 'vue2-google-maps';
 import router from './router';
 import store from './store';
@@ -19,6 +20,7 @@ Vue.component('vue-google-autocomplete', VueGoogleAutocomplete);
 Vue.component('vue-embed-google-map', GoogleMap);
 Vue.component('weather-chart', WeatherChart);
 
+Vue.use(Trend);
 Vue.use(VueGoogleMaps, {
   load: {
     key: KEYS.GOOGLE_PLACES_API_KEY,

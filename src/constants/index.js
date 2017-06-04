@@ -22,4 +22,4 @@ export const findInSeq = (seq, predicate) => _.find(seq, predicate);
 export const has = (o, path) => _.has(o, path);
 
 // ℉ =(K - 273.15)* 1.8000 + 32.00
-export const KToF = k => (k - 273.15) * 1.8 + 32;
+export const KToF = k => (parseInt(k) - 273.15) * 1.8 + 32;

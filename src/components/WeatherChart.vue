@@ -1,30 +1,38 @@
 <template lang="html">
-  <div class="small">
-    <line-chart :chart-data="dataset" :options="{ legend:{ display: false} }"></line-chart>
+  <div>
+    <div class="small">
+      <trend
+        :data="low"
+        :gradient="['#6fa8dc', '#42b983', '#2c3e50']"
+        auto-draw
+        smooth
+      >
+      </trend>
+    </div>
+    <div class="small">
+      <trend
+        :data="high"
+        :gradient="['#ea941b', '#eaba1b', '#ea5b1b']"
+        auto-draw
+        smooth
+      >
+      </trend>
+    </div>
   </div>
 </template>
 
 <script>
-import LineChart from './LineChart';
 import {KToF, } from '../constants';
 export default {
-  components: {
-    LineChart,
-  },
   data () {
     const { Weather, } = this.$store.state.API;
     return {
-      dataset: {
-        labels: Weather.weatherData
-          .map(data => data.dt_txt),
-        datasets: Weather.weatherData
-          .map(data => ({
-            label: 'This Week',
-            backgroundColor: '#2c3e50',
-            data: [ KToF(data.main.temp_min), KToF(data.main.temp_max), ],
-          }
-        )),
-      },
+      low: Weather.weatherData
+        .map((data, i) =>
+          i < 39 && parseInt(KToF(data.main.temp_min))),
+      high: Weather.weatherData
+        .map((data, i) =>
+          i < 39 && parseInt(KToF(data.main.temp_max))),
     };
   },
 };
