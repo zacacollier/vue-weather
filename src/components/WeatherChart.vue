@@ -2,7 +2,7 @@
   <div>
     <div class="small">
       <trend
-        :data="low"
+        :data="lows"
         :gradient="['#6fa8dc', '#42b983', '#2c3e50']"
         auto-draw
         smooth
@@ -11,7 +11,7 @@
     </div>
     <div class="small">
       <trend
-        :data="high"
+        :data="highs"
         :gradient="['#ea941b', '#eaba1b', '#ea5b1b']"
         auto-draw
         smooth
@@ -23,7 +23,15 @@
 
 <script>
 import {KToF, } from '../constants';
+import {mapGetters, } from 'vuex';
+
 export default {
+  computed: {
+    ...mapGetters([
+      'highs',
+      'lows',
+    ]),
+  },
   data () {
     const { Weather, } = this.$store.state.API;
     return {

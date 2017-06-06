@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import createPersistedState from 'vuex-persistedstate';
-import initialState from './initialState';
+import state from './initialState';
 import mutations from './mutations';
 import axios from 'axios';
 import * as C from '../constants';
@@ -11,8 +11,18 @@ Vue.config.devtools = true;
 
 const store = new Vuex.Store({
   plugins: [ createPersistedState(), ],
-  state: initialState,
+  /* ./initialState.js, */
+  state,
+  /* ./mutations.js, */
   mutations,
+  getters: {
+    highs: (state) => state.API.Weather.weatherData.map(data =>
+      C.KToF(data.main.temp_max)),
+    lows: (state) => state.API.Weather.weatherData.map(data =>
+      C.KToF(data.main.temp_min)),
+      // return state.API.Weather.weatherData<
+      // .map(data => C.KToF(data.main.temp_max)),
+  },
   actions: {
     handleSearchSubmit ({ commit, }, addressData) {
       console.log(addressData);
