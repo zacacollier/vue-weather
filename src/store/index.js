@@ -16,12 +16,14 @@ const store = new Vuex.Store({
   /* ./mutations.js, */
   mutations,
   getters: {
-    highs: (state) => state.API.Weather.weatherData.map(data =>
-      C.KToF(data.main.temp_max)),
-    lows: (state) => state.API.Weather.weatherData.map(data =>
-      C.KToF(data.main.temp_min)),
-      // return state.API.Weather.weatherData<
-      // .map(data => C.KToF(data.main.temp_max)),
+    highs: (state) => state.API.Weather.weatherData
+      .map(data =>
+        parseInt(C.KToF(data.main.temp_max)))
+      .filter(d => d),
+    lows: (state) => state.API.Weather.weatherData
+      .map(data =>
+        parseInt(C.KToF(data.main.temp_min)))
+      .filter(d => d),
   },
   actions: {
     handleSearchSubmit ({ commit, }, addressData) {

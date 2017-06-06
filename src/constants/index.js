@@ -17,9 +17,24 @@ export const GoogleGeocodeURL = (lat, long, key = KEYS.GOOGLE_GEOCODE_API_KEY) =
  *  @param { Array } seq : Array to search within
  *  @param { * }  predicate : Search criteria
  */
-export const findInSeq = (seq, predicate) => _.find(seq, predicate);
+export const findInSeq = (seq, predicate) =>
+  _.find(seq, predicate);
 
-export const has = (o, path) => _.has(o, path);
+/*  Given property `p` in Object `o`, determine whether or not
+ *  that Object contains that property
+ *  @param { o } object : Object to search within
+ *  @param { p }  predicate : Search criteria
+ */
+export const has = (o, p) =>
+  _.has(o, p);
+
+/*  Break up a given Array([seq]) into `n` pieces.
+ *  @param { Array } seq : Array to search within
+ *  @param { * }  predicate : Search criteria
+ */
+export const chunk = (seq, n) =>
+  _.chunk(seq, n);
 
 // ℉ =(K - 273.15)* 1.8000 + 32.00
-export const KToF = k => (parseInt(k) - 273.15) * 1.8 + 32;
+export const KToF = k =>
+  (parseInt(k) - 273.15) * 1.8 + 32;
